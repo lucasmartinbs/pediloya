@@ -16,8 +16,17 @@ public class User {
     private String departamento;
     private String provincia;
     private String telefono;
+    private String tipousuario;
 
     public User() {
+    }
+
+    public String getTipousuario() {
+        return tipousuario;
+    }
+
+    public void setTipousuario(String tipousuario) {
+        this.tipousuario = tipousuario;
     }
 
     public Boolean getRegistro() {

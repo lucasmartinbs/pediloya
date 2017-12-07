@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class RegistroUsuario extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -46,6 +49,7 @@ public class RegistroUsuario extends AppCompatActivity {
             public void onClick(View v) {
                 String nombreusu = nombre.getText().toString();
                 String apellidousu = apellido.getText().toString();
+                String fechanacusu = fechanac.getText().toString();
 
                 if ("".equals(nombreusu) || "".equals(apellidousu) ) {
                     Toast.makeText(RegistroUsuario.this, "Nombre o Apellido de Usuario vacío", Toast.LENGTH_SHORT).show();
@@ -59,8 +63,9 @@ public class RegistroUsuario extends AppCompatActivity {
                     user1.setEmail(user.getEmail());
                     user1.setNombre(nombreusu);
                     user1.setApellido(apellidousu);
+                    //user1.setFechanac(DateFormat fechanacusu);
                     user1.setRegistro(Boolean.TRUE);
-
+                    user1.setTipousuario("C");
 
                     myRef.child(user.getUid()).setValue(user1);
 
