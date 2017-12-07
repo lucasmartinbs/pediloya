@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\DIEGOARIEL\Desktop\Proyectos\pediloya\app\app.iml" filepath="C:\Users\DIEGOARIEL\Desktop\Proyectos\pediloya\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/pediloya.iml" filepath="$PROJECT_DIR$/pediloya.iml" />
+      <module fileurl="file://C:\Users\DIEGOARIEL\Desktop\Proyectos\pediloya\pediloya.iml" filepath="C:\Users\DIEGOARIEL\Desktop\Proyectos\pediloya\pediloya.iml" />
     </modules>
   </component>
 </project>

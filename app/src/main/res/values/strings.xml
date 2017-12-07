@@ -3,4 +3,11 @@
     <string name="email">Email Address</string>
     <string name="password">Password</string>
     <string name="title_activity_blank">Blank</string>
+    <string name="nombre">First Name</string>
+    <string name="apellido">Last Name</string>
+    <string name="fechanac">Birth Day</string>
+
+    //Botones
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
 </resources>

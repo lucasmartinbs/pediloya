@@ -3,6 +3,11 @@
     <string name="app_name">Pediloya</string>
     <string name="email">Correo Electrónico</string>
     <string name="password">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="fechanac">Fecha de Nacimiento</string>
 
-
+    //Botones
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
