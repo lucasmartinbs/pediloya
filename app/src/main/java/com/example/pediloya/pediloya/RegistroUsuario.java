@@ -1,5 +1,6 @@
 package com.example.pediloya.pediloya;
 
+import android.content.Intent;
 import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pediloya.pediloya.activity.Blank;
 import com.example.pediloya.pediloya.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,6 +63,9 @@ public class RegistroUsuario extends AppCompatActivity {
 
 
                     myRef.child(user.getUid()).setValue(user1);
+
+                    Intent intent = new Intent(MainActivity.this, Blank.class);
+                    startActivity(intent);
                 }
             }
         });
