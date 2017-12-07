@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "96365196761",
+    "firebase_url": "https://pediloya-435db.firebaseio.com",
+    "project_id": "pediloya-435db",
+    "storage_bucket": "pediloya-435db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96365196761:android:7a2a94aad2155242",
+        "android_client_info": {
+          "package_name": "com.example.pediloya.pediloya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96365196761-le0jr449uljmpmvj7n5b0fh9n4ijk74b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-nGZfqYs3tnuOFVq8_2a6X1xaQDeyl5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

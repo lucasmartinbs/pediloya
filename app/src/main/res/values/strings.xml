@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Pediloya</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="title_activity_blank">Blank</string>
+</resources>
