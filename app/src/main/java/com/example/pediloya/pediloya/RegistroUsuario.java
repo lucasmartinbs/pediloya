@@ -64,7 +64,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
                     myRef.child(user.getUid()).setValue(user1);
 
-                    Intent intent = new Intent(MainActivity.this, Blank.class);
+                    Intent intent = new Intent(RegistroUsuario.this, Blank.class);
                     startActivity(intent);
                 }
             }
