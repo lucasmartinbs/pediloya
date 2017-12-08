@@ -6,6 +6,13 @@
     <string name="nombre">First Name</string>
     <string name="apellido">Last Name</string>
     <string name="fechanac">Birth Day</string>
+    <string name="calle">Address</string>
+    <string name="nro">Number</string>
+    <string name="barrio">Neighborhood</string>
+    <string name="localidad">Location</string>
+    <string name="departamento">Departament</string>
+    <string name="provincia">City</string>
+    <string name="telefono">Telephone</string>
 
     //Botones
     <string name="aceptar">Accept</string>

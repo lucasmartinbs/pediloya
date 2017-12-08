@@ -5,10 +5,10 @@ import java.util.Date;
 public class User {
     private String uid;
     private String email;
-    private Boolean registro;
+    private String registro;
     private String nombre;
     private String apellido;
-    private Date fechanac;
+    private String fechanac;
     private String calle;
     private String nrocasa;
     private String barrio;
@@ -29,11 +29,11 @@ public class User {
         this.tipousuario = tipousuario;
     }
 
-    public Boolean getRegistro() {
+    public String getRegistro() {
         return registro;
     }
 
-    public void setRegistro(Boolean registro) {
+    public void setRegistro(String registro) {
         this.registro = registro;
     }
 
@@ -73,11 +73,11 @@ public class User {
         this.apellido = apellido;
     }
 
-    public Date getFechanac() {
+    public String getFechanac() {
         return fechanac;
     }
 
-    public void setFechanac(Date fechanac) {
+    public void setFechanac(String fechanac) {
         this.fechanac = fechanac;
     }
 

@@ -6,6 +6,13 @@
     <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
     <string name="fechanac">Fecha de Nacimiento</string>
+    <string name="calle">Calle</string>
+    <string name="nro">Numero</string>
+    <string name="barrio">Barrio</string>
+    <string name="localidad">localidad</string>
+    <string name="departamento">Departamento</string>
+    <string name="provincia">Provinvia</string>
+    <string name="telefono">Telefono</string>
 
     //Botones
     <string name="aceptar">Aceptar</string>

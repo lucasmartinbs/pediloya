@@ -5,13 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.pediloya.pediloya.RegistroUsuario">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre"/>
+    tools:context="com.example.pediloya.pediloya.activity.RegistroUsuario">
 
     <EditText
         android:id="@+id/edtNombre"
@@ -21,12 +15,6 @@
         android:inputType="textPersonName"
         android:hint="@string/nombre" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/apellido" />
-
     <EditText
         android:id="@+id/edtApellido"
         android:layout_width="match_parent"
@@ -35,18 +23,64 @@
         android:inputType="textPersonName"
         android:hint="@string/apellido" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fechanac" />
-
     <EditText
         android:id="@+id/edtFechaNac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:hint="@string/fechanac"/>
+
+    <EditText
+        android:id="@+id/edtCalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/calle" />
+
+    <EditText
+        android:id="@+id/edtNroCasa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="@string/nro"/>
+
+    <EditText
+        android:id="@+id/edtBarrio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/barrio" />
+
+    <EditText
+        android:id="@+id/edtLocalidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/localidad" />
+
+    <EditText
+        android:id="@+id/edtDepartamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/departamento" />
+
+    <EditText
+        android:id="@+id/edtProvincia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/provincia" />
+
+    <EditText
+        android:id="@+id/edtTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/telefono"
+        android:inputType="phone"/>
 
    <LinearLayout
        android:layout_width="match_parent"

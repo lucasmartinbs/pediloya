@@ -11,15 +11,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 
-import com.example.pediloya.pediloya.activity.Blank;
+import com.example.pediloya.pediloya.activity.RegistroUsuario;
 import com.example.pediloya.pediloya.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
                                         user1.setUid(user.getUid());
                                         user1.setEmail(user.getEmail());
 
-
                                         myRef.child(user.getUid()).setValue(user1);
-
                                     } else {
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                         Toast.makeText(MainActivity.this, task.getException().getMessage(),
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = username.getText().toString();
                 String password = password1.getText().toString();
+                final Boolean[] registro = new Boolean[1];
                 if(!"".equals(email) && !"".equals(password)){
                     mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -101,8 +103,31 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Toast.makeText(MainActivity.this, "Login = " + user.getUid(),
-                                                Toast.LENGTH_LONG).show();
+                                        database = FirebaseDatabase.getInstance();
+                                        myRef = database.getReference("users").child(user.getUid()).child("registro");
+
+                                        //Toast.makeText(MainActivity.this, "Login = " + user.getUid(),Toast.LENGTH_LONG).show();
+
+                                        ////////////////////////////////////////////
+                                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                String value = dataSnapshot.getValue(String.class);
+                                                if (value != null) {
+                                                    Toast.makeText(MainActivity.this, "Login = " + value,Toast.LENGTH_LONG).show();
+
+                                                    //Log.d(TAG, "Value is: " + value);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                                            }
+                                        });
+
+                                        ////////////////////////////////////////////
+
 
                                         Intent intent = new Intent(MainActivity.this, RegistroUsuario.class);
                                         startActivity(intent);
