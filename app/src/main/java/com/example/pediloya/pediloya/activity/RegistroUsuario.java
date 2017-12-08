@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.pediloya.pediloya.R;
 import com.example.pediloya.pediloya.entity.User;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -56,19 +57,19 @@ public class RegistroUsuario extends AppCompatActivity {
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 String email = usuario.getText().toString();
                 String passwusu = password.getText().toString();
-                String nombreusu = nombre.getText().toString();
-                String apellidousu = apellido.getText().toString();
-                String fechanacusu = fechanac.getText().toString();
-                String calleusu = calle.getText().toString();
-                String nrocasausu = nrocasa.getText().toString();
-                String barriousu = barrio.getText().toString();
-                String localidadusu = localidad.getText().toString();
-                String departamentousu = departamento.getText().toString();
-                String provinviausu = provincia.getText().toString();
-                String telefonousu = telefono.getText().toString();
+                final String nombreusu = nombre.getText().toString();
+                final String apellidousu = apellido.getText().toString();
+                final String fechanacusu = fechanac.getText().toString();
+                final String calleusu = calle.getText().toString();
+                final String nrocasausu = nrocasa.getText().toString();
+                final String barriousu = barrio.getText().toString();
+                final String localidadusu = localidad.getText().toString();
+                final String departamentousu = departamento.getText().toString();
+                final String provinviausu = provincia.getText().toString();
+                final String telefonousu = telefono.getText().toString();
 
                 if ("".equals(email) || "".equals(passwusu)) {
                     Toast.makeText(RegistroUsuario.this, "Email o Contraseña vacíos", Toast.LENGTH_SHORT).show();
@@ -110,33 +111,42 @@ public class RegistroUsuario extends AppCompatActivity {
                     return;
                 }
 
-                mAuth.createUserWithEmailAndPassword(email, passwusu).addOnCompleteListener(RegistroUsuario.this, new OnCompleteListener<AuthResult>() {
+                mAuth.createUserWithEmailAndPassword(email, passwusu)
+                .addOnCompleteListener(RegistroUsuario.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegistroUsuario.this, user.getUid(),Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(RegistroUsuario.this, user.getUid(),
+                                    Toast.LENGTH_LONG).show();
+
                             database = FirebaseDatabase.getInstance();
                             myRef = database.getReference("users");
+
                             User user1 = new User();
+
                             user1.setUid(user.getUid());
                             user1.setEmail(user.getEmail());
-                            //user1.setNombre(nombreusu);
-                            //user1.setApellido(apellidousu);
-                            //user1.setFechanac(fechanacusu);
-                            //user1.setCalle(calleusu);
-                            //user1.setNrocasa(nrocasausu);
-                            //user1.setBarrio(barriousu);
-                            //user1.setLocalidad(localidadusu);
-                            //user1.setDepartamento(departamentousu);
-                            //user1.setProvincia(provinviausu);
-                            //user1.setTelefono(telefonousu);
-                            //user1.setRegistro("S");
-                            //user1.setTipousuario("C");
+                            user1.setNombre(nombreusu);
+                            user1.setApellido(apellidousu);
+                            user1.setFechanac(fechanacusu);
+                            user1.setCalle(calleusu);
+                            user1.setNrocasa(nrocasausu);
+                            user1.setBarrio(barriousu);
+                            user1.setLocalidad(localidadusu);
+                            user1.setDepartamento(departamentousu);
+                            user1.setProvincia(provinviausu);
+                            user1.setTelefono(telefonousu);
+                            user1.setRegistro("S");
+                            user1.setTipousuario("C");
 
                             myRef.child(user.getUid()).setValue(user1);
+
+                            Intent intent = new Intent(RegistroUsuario.this, Blank.class);
+                            startActivity(intent);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(RegistroUsuario.this, task.getException().getMessage(),
@@ -147,11 +157,9 @@ public class RegistroUsuario extends AppCompatActivity {
                     }
                 });
 
-                    Intent intent = new Intent(RegistroUsuario.this, Blank.class);
-                    startActivity(intent);
-
             }
         });
+
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
