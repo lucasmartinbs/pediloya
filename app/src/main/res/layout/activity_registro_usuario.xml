@@ -113,9 +113,10 @@
             android:hint="@string/provincia" />
 
         <Spinner
+            android:id="@+id/spinner_provincia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:entries="@array/provincias"/>
 
         <EditText
             android:id="@+id/edtTelefono"

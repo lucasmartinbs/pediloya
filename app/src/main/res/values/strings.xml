@@ -22,4 +22,30 @@
     //Botones
     <string name="aceptar">Accept</string>
     <string name="cancelar">Cancel</string>
+
+    <string-array name="provincias">
+        <item>Buenos Aires</item>
+        <item>La Rioja</item>
+        <item>Córdoba</item>
+        <item>Tucuman</item>
+        <item>Catamarca</item>
+        <item>Salta</item>
+        <item>Jujuy</item>
+        <item>Formosa</item>
+        <item>Entre Rios</item>
+        <item>Chaco</item>
+        <item>Santiago del Estero</item>
+        <item>Santa Fé</item>
+        <item>Misiones</item>
+        <item>Corrientes</item>
+        <item>San Luis</item>
+        <item>San Juan</item>
+        <item>Mendoza</item>
+        <item>La Pampa</item>
+        <item>Neuquen</item>
+        <item>Rio Negro</item>
+        <item>Chubit</item>
+        <item>Santa Cruz</item>
+        <item>Tierra del Fuego</item>
+    </string-array>
 </resources>

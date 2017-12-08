@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.pediloya.pediloya.R;
@@ -25,6 +27,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, departamento, provincia, telefono;
+    private Spinner SpinnerProvincia;
     private Button btnAceptar, btnCancelar;
 
     private FirebaseDatabase database;
@@ -37,6 +40,7 @@ public class RegistroUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
 
+        //SpinnerProvincia = findViewById(R.id.spinner_provincia);
         usuario = findViewById(R.id.edtusuario);
         password = findViewById(R.id.edtPassw);
         nombre = findViewById(R.id.edtNombre);
@@ -120,8 +124,8 @@ public class RegistroUsuario extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Toast.makeText(RegistroUsuario.this, user.getUid(),
-                                    Toast.LENGTH_LONG).show();
+                            //Toast.makeText(RegistroUsuario.this, user.getUid(),
+                             //       Toast.LENGTH_LONG).show();
 
                             database = FirebaseDatabase.getInstance();
                             myRef = database.getReference("users");
