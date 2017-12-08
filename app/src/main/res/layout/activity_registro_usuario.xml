@@ -1,104 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.example.pediloya.pediloya.activity.RegistroUsuario">
 
-    <EditText
-        android:id="@+id/edtNombre"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/nombre" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.pediloya.pediloya.activity.RegistroUsuario">
 
-    <EditText
-        android:id="@+id/edtApellido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/apellido" />
-
-    <EditText
-        android:id="@+id/edtFechaNac"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:hint="@string/fechanac"/>
-
-    <EditText
-        android:id="@+id/edtCalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/calle" />
-
-    <EditText
-        android:id="@+id/edtNroCasa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="@string/nro"/>
-
-    <EditText
-        android:id="@+id/edtBarrio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/barrio" />
-
-    <EditText
-        android:id="@+id/edtLocalidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/localidad" />
-
-    <EditText
-        android:id="@+id/edtDepartamento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/departamento" />
-
-    <EditText
-        android:id="@+id/edtProvincia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/provincia" />
-
-    <EditText
-        android:id="@+id/edtTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/telefono"
-        android:inputType="phone"/>
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:gravity="center">
-
-
-       <Button
-           android:id="@+id/btnAceptar"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/aceptar"/>
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edtusuario"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cancelar"/>
-   </LinearLayout>
-</LinearLayout>
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email" />
+
+
+        <EditText
+            android:id="@+id/edtPassw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/password"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/datosusu"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/nombre" />
+
+        <EditText
+            android:id="@+id/edtApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/apellido" />
+
+        <EditText
+            android:id="@+id/edtFechaNac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:hint="@string/fechanac"/>
+
+        <EditText
+            android:id="@+id/edtCalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:hint="@string/calle" />
+
+        <EditText
+            android:id="@+id/edtNroCasa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/nro"/>
+
+        <EditText
+            android:id="@+id/edtBarrio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/barrio" />
+
+        <EditText
+            android:id="@+id/edtLocalidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/localidad" />
+
+        <EditText
+            android:id="@+id/edtDepartamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/departamento" />
+
+        <EditText
+            android:id="@+id/edtProvincia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapWords"
+            android:hint="@string/provincia" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <EditText
+            android:id="@+id/edtTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/telefono"
+            android:inputType="phone"/>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center">
+
+
+           <Button
+               android:id="@+id/btnAceptar"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/aceptar"/>
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancelar"/>
+       </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pediloya</string>
+    <string name="app_name">PediloYa</string>
+    <string name="usuario">Usuario</string>
     <string name="email">Correo Electrónico</string>
     <string name="password">Contraseña</string>
     <string name="nombre">Nombre</string>
@@ -13,6 +14,9 @@
     <string name="departamento">Departamento</string>
     <string name="provincia">Provinvia</string>
     <string name="telefono">Telefono</string>
+
+    //Titulos
+    <string name="datosusu">Datos del Usuario</string>
 
     //Botones
     <string name="aceptar">Aceptar</string>

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.example.pediloya.pediloya.activity.Blank;
 import com.example.pediloya.pediloya.activity.RegistroUsuario;
 import com.example.pediloya.pediloya.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,41 +52,8 @@ public class MainActivity extends AppCompatActivity {
         crearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = username.getText().toString();
-                String password = password1.getText().toString();
-
-                if ("".equals(email) || "".equals(password)) {
-                    Toast.makeText(MainActivity.this, "Contraseña y/o Email vacío", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "createUserWithEmail:success");
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        Toast.makeText(MainActivity.this, user.getUid(),
-                                                Toast.LENGTH_LONG).show();
-                                        database = FirebaseDatabase.getInstance();
-                                        myRef = database.getReference("users");
-                                        User user1 = new User();
-
-                                        user1.setUid(user.getUid());
-                                        user1.setEmail(user.getEmail());
-
-                                        myRef.child(user.getUid()).setValue(user1);
-                                    } else {
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(MainActivity.this, task.getException().getMessage(),
-                                                Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                }
-                            });
-                }
+                Intent intent = new Intent(MainActivity.this, RegistroUsuario.class);
+                startActivity(intent);
             }
         });
 
@@ -103,37 +71,9 @@ public class MainActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        database = FirebaseDatabase.getInstance();
-                                        myRef = database.getReference("users").child(user.getUid()).child("registro");
 
-                                        //Toast.makeText(MainActivity.this, "Login = " + user.getUid(),Toast.LENGTH_LONG).show();
-
-                                        ////////////////////////////////////////////
-                                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                String value = dataSnapshot.getValue(String.class);
-                                                if (value != null) {
-                                                    Toast.makeText(MainActivity.this, "Login = " + value,Toast.LENGTH_LONG).show();
-
-                                                    //Log.d(TAG, "Value is: " + value);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-                                                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-                                            }
-                                        });
-
-                                        ////////////////////////////////////////////
-
-
-                                        Intent intent = new Intent(MainActivity.this, RegistroUsuario.class);
+                                        Intent intent = new Intent(MainActivity.this, Blank.class);
                                         startActivity(intent);
-
-
-
                                     } else {
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                                         Toast.makeText(MainActivity.this, task.getException().getMessage(),
