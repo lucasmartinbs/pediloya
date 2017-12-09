@@ -25,27 +25,27 @@
 
     <string-array name="provincias">
         <item>Buenos Aires</item>
-        <item>La Rioja</item>
-        <item>Córdoba</item>
-        <item>Tucuman</item>
         <item>Catamarca</item>
-        <item>Salta</item>
-        <item>Jujuy</item>
-        <item>Formosa</item>
-        <item>Entre Rios</item>
         <item>Chaco</item>
-        <item>Santiago del Estero</item>
-        <item>Santa Fé</item>
-        <item>Misiones</item>
+        <item>Chubut</item>
+        <item>Córdoba</item>
         <item>Corrientes</item>
-        <item>San Luis</item>
-        <item>San Juan</item>
-        <item>Mendoza</item>
+        <item>Entre Rios</item>
+        <item>Formosa</item>
+        <item>Jujuy</item>
         <item>La Pampa</item>
+        <item>La Rioja</item>
+        <item>Mendoza</item>
+        <item>Misiones</item>
         <item>Neuquen</item>
         <item>Rio Negro</item>
-        <item>Chubit</item>
+        <item>Salta</item>
+        <item>San Luis</item>
+        <item>San Juan</item>
+        <item>Santa Fé</item>
         <item>Santa Cruz</item>
+        <item>Santiago del Estero</item>
         <item>Tierra del Fuego</item>
+        <item>Tucuman</item>
     </string-array>
 </resources>
