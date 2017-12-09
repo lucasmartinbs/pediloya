@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegistroUsuario extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, departamento, provincia, telefono;
+    private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, departamento, telefono;
     private Spinner SpinnerProvincia;
     private Button btnAceptar, btnCancelar;
 
@@ -40,7 +40,7 @@ public class RegistroUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
 
-        //SpinnerProvincia = findViewById(R.id.spinner_provincia);
+        SpinnerProvincia = (Spinner) findViewById(R.id.spinner_provincia);
         usuario = findViewById(R.id.edtusuario);
         password = findViewById(R.id.edtPassw);
         nombre = findViewById(R.id.edtNombre);
@@ -51,7 +51,6 @@ public class RegistroUsuario extends AppCompatActivity {
         barrio = findViewById(R.id.edtBarrio);
         localidad = findViewById(R.id.edtLocalidad);
         departamento = findViewById(R.id.edtDepartamento);
-        provincia = findViewById(R.id.edtProvincia);
         telefono = findViewById(R.id.edtTelefono);
 
         btnAceptar = findViewById(R.id.btnAceptar);
@@ -72,7 +71,8 @@ public class RegistroUsuario extends AppCompatActivity {
                 final String barriousu = barrio.getText().toString();
                 final String localidadusu = localidad.getText().toString();
                 final String departamentousu = departamento.getText().toString();
-                final String provinviausu = provincia.getText().toString();
+                final String provinviausu = SpinnerProvincia.getSelectedItem().toString();
+                //provincia.getText().toString();
                 final String telefonousu = telefono.getText().toString();
 
                 if ("".equals(email) || "".equals(passwusu)) {

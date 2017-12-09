@@ -104,13 +104,10 @@
             android:inputType="textCapWords"
             android:hint="@string/departamento" />
 
-        <EditText
-            android:id="@+id/edtProvincia"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textCapWords"
-            android:hint="@string/provincia" />
+            android:text="@string/provincia"/>
 
         <Spinner
             android:id="@+id/spinner_provincia"
