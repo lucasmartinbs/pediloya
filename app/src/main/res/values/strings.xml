@@ -22,6 +22,28 @@
     //Botones
     <string name="aceptar">Accept</string>
     <string name="cancelar">Cancel</string>
+    <string name="examinar">Browse</string>
+
+    <string-array name="departamentos">
+        <item>ANGEL VICENTE PEÑALOZA</item>
+        <item>ARAUCO</item>
+        <item>CAPITAL</item>
+        <item>CASTRO BARROS</item>
+        <item>CHAMICAL</item>
+        <item>CHILECITO</item>
+        <item>FAMATINA</item>
+        <item>FELIPE VARELA</item>
+        <item>GRAL. BELGRANO</item>
+        <item>GRAL. LAMADRID</item>
+        <item>GRAL. OCAMPO</item>
+        <item>GRAL. SAN MARTÍN</item>
+        <item>INDEPENDENCIA</item>
+        <item>JUAN FACUNDO QUIROGA</item>
+        <item>ROSARIO VERA PEÑALOZA</item>
+        <item>SAN BLAS DE LOS SAUCES</item>
+        <item>SANAGASTA</item>
+        <item>VINCHINA</item>
+    </string-array>
 
     <string-array name="provincias">
         <item>Buenos Aires</item>

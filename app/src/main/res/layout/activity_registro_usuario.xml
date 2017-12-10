@@ -40,45 +40,75 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtNombre"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textCapWords"
-            android:hint="@string/nombre" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtApellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textCapWords"
-            android:hint="@string/apellido" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtFechaNac"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="@string/fechanac"/>
+                <ImageView
+                    android:id="@+id/foto"
+                    android:layout_width="140dp"
+                    android:layout_height="160dp" />
 
-        <EditText
-            android:id="@+id/edtCalle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:hint="@string/calle" />
+                <Button
+                    android:id="@+id/btnexaminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Examinar"/>
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtNroCasa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="@string/nro"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:hint="@string/nombre"
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/edtApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:inputType="textCapWords"
+                    android:hint="@string/apellido" />
+
+                <EditText
+                    android:id="@+id/edtFechaNac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:inputType="date"
+                    android:hint="@string/fechanac"/>
+
+                <EditText
+                    android:id="@+id/edtCalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textCapWords"
+                    android:hint="@string/calle" />
+
+                <EditText
+                    android:id="@+id/edtNroCasa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/nro"/>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edtBarrio"
@@ -96,24 +126,16 @@
             android:inputType="textCapWords"
             android:hint="@string/localidad" />
 
-        <EditText
-            android:id="@+id/edtDepartamento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textCapWords"
-            android:hint="@string/departamento" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/provincia"/>
+            android:text="@string/departamento"/>
 
         <Spinner
-            android:id="@+id/spinner_provincia"
+            android:id="@+id/spinner_departamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/provincias"/>
+            android:entries="@array/departamentos"/>
 
         <EditText
             android:id="@+id/edtTelefono"

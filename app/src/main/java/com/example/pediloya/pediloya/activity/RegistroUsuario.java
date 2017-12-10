@@ -26,8 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegistroUsuario extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, departamento, telefono;
-    private Spinner SpinnerProvincia;
+    private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, telefono;
+    private Spinner SpinnerDepartamento;
     private Button btnAceptar, btnCancelar;
 
     private FirebaseDatabase database;
@@ -40,7 +40,7 @@ public class RegistroUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
 
-        SpinnerProvincia = (Spinner) findViewById(R.id.spinner_provincia);
+        SpinnerDepartamento = (Spinner) findViewById(R.id.spinner_departamento);
         usuario = findViewById(R.id.edtusuario);
         password = findViewById(R.id.edtPassw);
         nombre = findViewById(R.id.edtNombre);
@@ -50,7 +50,6 @@ public class RegistroUsuario extends AppCompatActivity {
         nrocasa = findViewById(R.id.edtNroCasa);
         barrio = findViewById(R.id.edtBarrio);
         localidad = findViewById(R.id.edtLocalidad);
-        departamento = findViewById(R.id.edtDepartamento);
         telefono = findViewById(R.id.edtTelefono);
 
         btnAceptar = findViewById(R.id.btnAceptar);
@@ -70,8 +69,8 @@ public class RegistroUsuario extends AppCompatActivity {
                 final String nrocasausu = nrocasa.getText().toString();
                 final String barriousu = barrio.getText().toString();
                 final String localidadusu = localidad.getText().toString();
-                final String departamentousu = departamento.getText().toString();
-                final String provinviausu = SpinnerProvincia.getSelectedItem().toString();
+                final String departamentousu = SpinnerDepartamento.getSelectedItem().toString();
+                final String provinviausu = "La Rioja";
                 //provincia.getText().toString();
                 final String telefonousu = telefono.getText().toString();
 
@@ -110,8 +109,8 @@ public class RegistroUsuario extends AppCompatActivity {
                     return;
                 }
 
-                if ( "".equals(provinviausu) ) {
-                    Toast.makeText(RegistroUsuario.this, "Debe ingresar la Provincia", Toast.LENGTH_SHORT).show();
+                if ( "".equals(departamentousu) ) {
+                    Toast.makeText(RegistroUsuario.this, "Debe ingresar el Departamento", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

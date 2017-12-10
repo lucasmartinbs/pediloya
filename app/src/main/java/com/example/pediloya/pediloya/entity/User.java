@@ -17,8 +17,17 @@ public class User {
     private String provincia;
     private String telefono;
     private String tipousuario;
+    private String urlfoto;
 
     public User() {
+    }
+
+    public String getUrlfoto() {
+        return urlfoto;
+    }
+
+    public void setUrlfoto(String urlfoto) {
+        this.urlfoto = urlfoto;
     }
 
     public String getTipousuario() {

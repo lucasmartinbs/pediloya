@@ -21,4 +21,5 @@
     //Botones
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="examinar">Examinar</string>
 </resources>
