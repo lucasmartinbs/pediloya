@@ -1,14 +1,16 @@
 package com.example.pediloya.pediloya.activity;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,12 +18,22 @@ import com.example.pediloya.pediloya.R;
 import com.example.pediloya.pediloya.entity.User;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+//import com.google.android.gms.tasks.OnFailureListener;
+//import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.storage.OnPausedListener;
+//import com.google.firebase.storage.OnProgressListener;
+//import com.google.firebase.storage.StorageReference;
+//import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+//import java.io.File;
 
 public class RegistroUsuario extends AppCompatActivity {
 
@@ -29,6 +41,9 @@ public class RegistroUsuario extends AppCompatActivity {
     private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, telefono;
     private Spinner SpinnerDepartamento;
     private Button btnAceptar, btnCancelar;
+    private ImageView imageView;
+    private String lsuri;
+    public static final int REQUEST_CODE_FOR_PICK = 2;
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -52,6 +67,8 @@ public class RegistroUsuario extends AppCompatActivity {
         localidad = findViewById(R.id.edtLocalidad);
         telefono = findViewById(R.id.edtTelefono);
 
+        imageView = findViewById(R.id.foto);
+
         btnAceptar = findViewById(R.id.btnAceptar);
         btnCancelar = findViewById(R.id.btnCancelar);
 
@@ -71,8 +88,10 @@ public class RegistroUsuario extends AppCompatActivity {
                 final String localidadusu = localidad.getText().toString();
                 final String departamentousu = SpinnerDepartamento.getSelectedItem().toString();
                 final String provinviausu = "La Rioja";
-                //provincia.getText().toString();
                 final String telefonousu = telefono.getText().toString();
+
+                //Toast.makeText(RegistroUsuario.this, lsuri,
+                //       Toast.LENGTH_LONG).show();
 
                 if ("".equals(email) || "".equals(passwusu)) {
                     Toast.makeText(RegistroUsuario.this, "Email o Contraseña vacíos", Toast.LENGTH_SHORT).show();
@@ -143,6 +162,7 @@ public class RegistroUsuario extends AppCompatActivity {
                             user1.setDepartamento(departamentousu);
                             user1.setProvincia(provinviausu);
                             user1.setTelefono(telefonousu);
+                            user1.setUrlfoto(lsuri);
                             user1.setRegistro("S");
                             user1.setTipousuario("C");
 
@@ -163,7 +183,6 @@ public class RegistroUsuario extends AppCompatActivity {
             }
         });
 
-
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,5 +191,62 @@ public class RegistroUsuario extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void loadImage(View v) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_CODE_FOR_PICK);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            try{
+                Uri uri = data.getData();
+                lsuri = data.getData().toString() ;
+//                InputStream inputStream = getContentResolver().openInputStream(uri);
+//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//                imageView.setImageBitmap(bitmap);
+                Picasso.with(this).load(uri).into(imageView);
+                //////////////////////////////////////////////////////
+                // File or Blob
+               /* Uri file = Uri.fromFile(new File(lsuri));
+
+                // Upload file and metadata to the path 'images/mountains.jpg'
+                StorageReference storageRef = null;
+                UploadTask uploadTask = storageRef.child("images/" + file.getLastPathSegment()).putFile(file);
+
+                // Listen for state changes, errors, and completion of the upload.
+                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        System.out.println("Upload is " + progress + "% done");
+                    }
+                }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+                        System.out.println("Upload is paused");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Handle successful uploads on complete
+                        Uri downloadUrl = taskSnapshot.getMetadata().getDownloadUrl();
+                    }
+                });
+*/
+
+                //////////////////////////////////////////////////////
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
     }
 }
