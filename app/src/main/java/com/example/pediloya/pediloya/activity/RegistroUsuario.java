@@ -1,5 +1,6 @@
 package com.example.pediloya.pediloya.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -18,8 +19,7 @@ import com.example.pediloya.pediloya.R;
 import com.example.pediloya.pediloya.entity.User;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-//import com.google.android.gms.tasks.OnFailureListener;
-//import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,10 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.storage.OnPausedListener;
-//import com.google.firebase.storage.OnProgressListener;
-//import com.google.firebase.storage.StorageReference;
-//import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 //import java.io.File;
@@ -44,9 +43,12 @@ public class RegistroUsuario extends AppCompatActivity {
     private ImageView imageView;
     private String lsuri;
     public static final int REQUEST_CODE_FOR_PICK = 2;
+    private ProgressDialog mProgressDialog;
+
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private StorageReference strfoto;
 
     private static final String TAG = "RegistroUsuario";
 
@@ -72,7 +74,11 @@ public class RegistroUsuario extends AppCompatActivity {
         btnAceptar = findViewById(R.id.btnAceptar);
         btnCancelar = findViewById(R.id.btnCancelar);
 
+        mProgressDialog = new ProgressDialog(this);
+
+
         mAuth = FirebaseAuth.getInstance();
+        strfoto = FirebaseStorage.getInstance().getReference();
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,56 +201,43 @@ public class RegistroUsuario extends AppCompatActivity {
 
     public void loadImage(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
         startActivityForResult(intent, REQUEST_CODE_FOR_PICK);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_FOR_PICK && resultCode == RESULT_OK) {
             try{
+                mProgressDialog.setTitle("Subiendo Foto de Perfil...");
+                //mProgressDialog.setMessage("Subiendo Foto");
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.show();
+
+
+
                 Uri uri = data.getData();
-                lsuri = data.getData().toString() ;
+                StorageReference filepath  = strfoto.child("fotos").child(uri.getLastPathSegment());
+                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        mProgressDialog.dismiss();
+
+                        Uri descargarfoto = taskSnapshot.getDownloadUrl();
+                        lsuri = descargarfoto.toString();
+                        Picasso.with(RegistroUsuario.this)
+                                .load(descargarfoto)
+                                .into(imageView);
+                        //Toast.makeText(RegistroUsuario.this, "Se subio exitosamente", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 //                InputStream inputStream = getContentResolver().openInputStream(uri);
 //                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 //                imageView.setImageBitmap(bitmap);
-                Picasso.with(this).load(uri).into(imageView);
-                //////////////////////////////////////////////////////
-                // File or Blob
-               /* Uri file = Uri.fromFile(new File(lsuri));
 
-                // Upload file and metadata to the path 'images/mountains.jpg'
-                StorageReference storageRef = null;
-                UploadTask uploadTask = storageRef.child("images/" + file.getLastPathSegment()).putFile(file);
-
-                // Listen for state changes, errors, and completion of the upload.
-                uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        System.out.println("Upload is " + progress + "% done");
-                    }
-                }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-                        System.out.println("Upload is paused");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Handle successful uploads on complete
-                        Uri downloadUrl = taskSnapshot.getMetadata().getDownloadUrl();
-                    }
-                });
-*/
-
-                //////////////////////////////////////////////////////
-            } catch (Exception e) {
+                } catch (Exception e) {
                 e.getStackTrace();
             }
         }
