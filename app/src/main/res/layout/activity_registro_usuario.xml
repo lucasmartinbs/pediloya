@@ -55,9 +55,9 @@
                     android:layout_width="140dp"
                     android:layout_height="160dp"
                     android:adjustViewBounds="false"
-                    android:background="@mipmap/ic_usuario_foreground"
                     android:cropToPadding="false"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    app:srcCompat="@mipmap/ic_usuario_foreground" />
 
                 <Button
                     android:id="@+id/btnexaminar"
@@ -93,8 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="15"
-                    android:inputType="date"
-                    android:hint="@string/fechanac"/>
+                    android:hint="@string/fechanac" />
 
                 <EditText
                     android:id="@+id/edtCalle"

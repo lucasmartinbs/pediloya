@@ -1,24 +1,31 @@
 package com.example.pediloya.pediloya.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pediloya.pediloya.R;
 import com.example.pediloya.pediloya.entity.User;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,19 +39,22 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
+
 //import java.io.File;
 
 public class RegistroUsuario extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText usuario, password, nombre, apellido, fechanac, calle, nrocasa, barrio, localidad, telefono;
+    private EditText usuario, password, nombre, apellido,  calle, fechanac,nrocasa, barrio, localidad, telefono;
     private Spinner SpinnerDepartamento;
     private Button btnAceptar, btnCancelar;
     private ImageView imageView;
     private String lsuri;
     public static final int REQUEST_CODE_FOR_PICK = 2;
     private ProgressDialog mProgressDialog;
-
+    private Uri uriFoto;
+    private DatePickerDialog.OnDateSetListener mDataSetListener;
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -76,9 +86,31 @@ public class RegistroUsuario extends AppCompatActivity {
 
         mProgressDialog = new ProgressDialog(this);
 
-
         mAuth = FirebaseAuth.getInstance();
         strfoto = FirebaseStorage.getInstance().getReference();
+
+        fechanac.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(RegistroUsuario.this, android.R.style.Theme_DeviceDefault_Dialog_MinWidth , mDataSetListener, year, month, day );
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDataSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = day +"/"+ month + "/" + year;
+                fechanac.setText(date);
+            }
+        };
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,6 +225,22 @@ public class RegistroUsuario extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // salir
+                if ( uriFoto != null ) {
+                    StorageReference filepath = strfoto.child(uriFoto.getLastPathSegment());
+                    //Toast.makeText(RegistroUsuario.this, uriFoto.toString(), Toast.LENGTH_LONG).show();
+
+                    filepath.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(RegistroUsuario.this, "Se Cancelo el Registro", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            //Toast.makeText(RegistroUsuario.this, "Error al eliminar Foto", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
                 finish();
             }
         });
@@ -205,6 +253,7 @@ public class RegistroUsuario extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_FOR_PICK);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -215,19 +264,17 @@ public class RegistroUsuario extends AppCompatActivity {
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.show();
 
-
-
-                Uri uri = data.getData();
-                StorageReference filepath  = strfoto.child("fotos").child(uri.getLastPathSegment());
-                filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                uriFoto = data.getData();
+                StorageReference filepath  = strfoto.child("fotos").child(uriFoto.getLastPathSegment());
+                filepath.putFile(uriFoto).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mProgressDialog.dismiss();
 
-                        Uri descargarfoto = taskSnapshot.getDownloadUrl();
-                        lsuri = descargarfoto.toString();
+                        uriFoto = taskSnapshot.getDownloadUrl();
+                        lsuri = uriFoto.toString();
                         Picasso.with(RegistroUsuario.this)
-                                .load(descargarfoto)
+                                .load(uriFoto)
                                 .into(imageView);
                         //Toast.makeText(RegistroUsuario.this, "Se subio exitosamente", Toast.LENGTH_SHORT).show();
                     }
