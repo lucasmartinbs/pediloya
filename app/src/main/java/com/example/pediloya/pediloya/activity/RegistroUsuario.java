@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pediloya.pediloya.R;
@@ -31,7 +30,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -183,6 +181,11 @@ public class RegistroUsuario extends AppCompatActivity {
                             //Toast.makeText(RegistroUsuario.this, user.getUid(),
                              //       Toast.LENGTH_LONG).show();
 
+                            //subir foto
+                            if (uriFoto != null) {
+                                new SubirFoto().execute();
+                            }
+
                             database = FirebaseDatabase.getInstance();
                             myRef = database.getReference("users");
 
@@ -253,8 +256,54 @@ public class RegistroUsuario extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_FOR_PICK);
     }
 
+    private class SubirFoto extends AsyncTask<Void, Void, Void> {
+
+        protected  void onPreExecute(){
+            mProgressDialog.setTitle("Subiendo Foto de Perfil...");
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.show();
+        }
+
+        protected Void doInBackground(Void... voids) {
+            StorageReference filepath  = strfoto.child("fotos").child(uriFoto.getLastPathSegment());
+            filepath.putFile(uriFoto).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    uriFoto = taskSnapshot.getDownloadUrl();
+                    lsuri = uriFoto.toString();
+                    mProgressDialog.dismiss();
+                }
+            });
+
+            return null;
+        }
+
+        protected  void onProgressUpdate(Float... valores){
+
+        }
+
+        protected void onPostExecute(Integer bytes){
+
+        }
+    }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_FOR_PICK && resultCode == RESULT_OK) {
+            try{
+                uriFoto = data.getData();
+                Picasso.with(RegistroUsuario.this)
+                        .load(uriFoto)
+                        .into(imageView);
+
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+    }
+
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_FOR_PICK && resultCode == RESULT_OK) {
@@ -288,5 +337,5 @@ public class RegistroUsuario extends AppCompatActivity {
                 e.getStackTrace();
             }
         }
-    }
+    }*/
 }
